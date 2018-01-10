@@ -6,6 +6,8 @@ function download_erlang() {
   erlang_package_url="https://s3.amazonaws.com/heroku-buildpack-elixir/erlang/cedar-14"
   erlang_package_url="${erlang_package_url}/$(erlang_tarball)"
 
+  output_section "Tarball location: ${cache_path}/$(erlang_tarball)"
+
   # If a previous download does not exist, then always re-download
   if [ ! -f ${cache_path}/$(erlang_tarball) ]; then
     clean_erlang_downloads
@@ -26,6 +28,17 @@ function clean_erlang_downloads() {
 
 function install_erlang() {
   output_section "Installing Erlang ${erlang_version} $(erlang_changed)"
+
+  output_section "Build path: ${build_path}"
+  output_section "Runtime path: ${runtime_path}"
+  output_section "Cache path: ${cache_path}"
+
+  output_section "Erlang path: $(erlang_path)"
+  output_section "Erlang build path: $(erlang_build_path)"
+  output_section "Runtime Erlang path: $(runtime_erlang_path)"
+  output_section "Runtime platform tools path: $(runtime_platform_tools_path)"
+  output_section "Platform tools path: $(platform_tools_path)"
+  output_section "Elixir path: $(elixir_path)"
 
   rm -rf $(erlang_build_path)
   mkdir -p $(erlang_build_path)
